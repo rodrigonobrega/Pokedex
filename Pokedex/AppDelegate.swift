@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  Pokedex
 //
-//  Created by Mac mini on 07/11/18.
-//  Copyright © 2018 Foxcode. All rights reserved.
+//  Created by Rodrigo on 07/11/18.
+//  Copyright © 2018. All rights reserved.
 //
 
 import UIKit
