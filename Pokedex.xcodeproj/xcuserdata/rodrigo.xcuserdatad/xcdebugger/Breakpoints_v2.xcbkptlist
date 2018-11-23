@@ -74,7 +74,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pokedex/AppDelegate.swift"
-            timestampString = "564096632.469105"
+            timestampString = "564633495.7863981"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "55"
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pokedex/controller/PokedexTableViewController.swift"
-            timestampString = "564622787.869679"
+            timestampString = "564633495.786458"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
             <Locations>
@@ -106,11 +106,11 @@
                   moduleName = "Pokedex"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/rodrigo/Documents/workspace/Pokedex/Pokedex/controller/PokedexTableViewController.swift"
-                  timestampString = "564548981.853807"
+                  timestampString = "564633495.935606"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "41"
-                  endingLineNumber = "41"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
                   offsetFromSymbolStart = "725">
                </Location>
                <Location
@@ -121,14 +121,30 @@
                   moduleName = "Pokedex"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/rodrigo/Documents/workspace/Pokedex/Pokedex/controller/PokedexTableViewController.swift"
-                  timestampString = "564548981.85789"
+                  timestampString = "564633495.9372751"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "42"
-                  endingLineNumber = "42"
+                  startingLineNumber = "29"
+                  endingLineNumber = "29"
                   offsetFromSymbolStart = "53">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pokedex/controller/PokedexCollectionViewController.swift"
+            timestampString = "564633495.786513"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
+            landmarkName = "collectionView(_:cellForItemAt:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class DetailViewController: UIViewController {
+class ImagesViewController: UIViewController {
     var arrayImages:[Data] = []
     var dataController:DataController!
     
@@ -43,9 +43,7 @@ class DetailViewController: UIViewController {
             
             self.title = pokemon.name
             self.addImageElementToArray()
-            //self.addImages()
             pokemon.downloadDetailImages()
-            //updateImages()
         }
     }
 
@@ -105,19 +103,7 @@ class DetailViewController: UIViewController {
 
 
 // MARK: - NSFetchedResultsControllerDelegate
-extension DetailViewController {
-    
-//    fileprivate func addImages() {
-////        self.addImageElementToArray(pokemon.back_default)
-////        self.addImageElementToArray(pokemon.back_female)
-////        self.addImageElementToArray(pokemon.back_shiny)
-////        self.addImageElementToArray(pokemon.back_shiny_female)
-////        self.addImageElementToArray(pokemon.front_female)
-////        self.addImageElementToArray(pokemon.front_shiny)
-////        self.addImageElementToArray(pokemon.front_shiny_female)
-//        self.addImageElementToArray()
-//    }
-    
+extension ImagesViewController {
    
     
     private func addImageElementToArray() {
@@ -151,7 +137,7 @@ extension DetailViewController {
 }
 
 
-extension DetailViewController: UICollectionViewDataSource {
+extension ImagesViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.arrayImages.count
     }
@@ -163,7 +149,8 @@ extension DetailViewController: UICollectionViewDataSource {
         let image = UIImage(data: arrayImages[indexPath.row])
         
         cell.imagePokemon.image = image
-        
+        cell.backgroundImageView.image = image
+        cell.backgroundImageView.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
         
         
         return cell
@@ -171,7 +158,7 @@ extension DetailViewController: UICollectionViewDataSource {
     
 }
 
-extension DetailViewController:NSFetchedResultsControllerDelegate {
+extension ImagesViewController:NSFetchedResultsControllerDelegate {
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         // addImages()

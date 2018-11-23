@@ -20,23 +20,10 @@ class PokedexTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         setupFetchedResultsController()
         
         if fetchedResultsController.fetchedObjects?.count == 0 {
-            
-//            for _ in 1...3 {
-//                let entity = NSEntityDescription.entity(forEntityName: "Pokemon", in: dataController.viewContext)
-//                let pokemon = NSManagedObject(entity: entity!, insertInto: dataController.viewContext) as! Pokemon
-//
-//
-//                //Pokemon(entity: <#T##NSEntityDescription#>, insertInto: <#T##NSManagedObjectContext?#>)
-//                //let pokemon = Pokemon(context: dataController.viewContext)
-//                pokemon.name = "asdf"
-//                pokemon.url = "url"
-//                let urlArray = pokemon.url?.components(separatedBy: "/")
-//                //pokemon.identifier = urlArray![(urlArray?.count)! - 2]
-//            }
-            
             
             PokedexService.shared.loadPokemonList(dataController) { (message ,pokemonDictionary)  in
                 if let message = message {
@@ -67,7 +54,9 @@ class PokedexTableViewController: UITableViewController {
         
                         //Pokemon(entity: <#T##NSEntityDescription#>, insertInto: <#T##NSManagedObjectContext?#>)
                         //let pokemon = Pokemon(context: dataController.viewContext)
-                        pokemon.name = pokemonAny["name"] as? String
+                        let name = pokemonAny["name"] as? String
+                        
+                        pokemon.name = name?.capitalizingFirst()
                         pokemon.url = pokemonAny["url"] as? String
                         let urlArray = pokemon.url?.components(separatedBy: "/")
                         pokemon.identifier = urlArray![(urlArray?.count)! - 2]
@@ -98,6 +87,7 @@ class PokedexTableViewController: UITableViewController {
         } catch {
             fatalError(error.localizedDescription)
         }
+        self.navigationItem.prompt = "\(fetchRequest.affectedStores?.count ?? 0) pokemons found"
     }
     
     override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
@@ -133,7 +123,7 @@ extension PokedexTableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let detailViewController = segue.destination as? DetailViewController {
+        if let detailViewController = segue.destination as? ImagesViewController {
             detailViewController.dataController = self.dataController
             detailViewController.pokemon = sender as? Pokemon
         }

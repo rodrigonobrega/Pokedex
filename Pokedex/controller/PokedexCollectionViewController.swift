@@ -79,7 +79,7 @@ extension PokedexCollectionViewController {
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let detailViewController = segue.destination as? DetailViewController {
+        if let detailViewController = segue.destination as? ImagesViewController {
             detailViewController.dataController = self.dataController
             detailViewController.pokemon = sender as? Pokemon
         }
@@ -91,28 +91,22 @@ extension PokedexCollectionViewController {
         
         let pokemon = fetchedResultsController.object(at: indexPath)
      //   cell.backgroundColor = UIColor.black.withAlphaComponent(0.3)
-        
-        cell.labelName.text = pokemon.name
-        cell.labelName.layer.cornerRadius = cell.labelName.frame.height/2
-        cell.labelName.layer.masksToBounds = true
-        cell.labelName.layer.borderColor = UIColor.gray.cgColor
-        cell.labelName.layer.borderWidth = 1.0
-
-        if let imageData = pokemon.front_default {
-            cell.imagePokemon.image = UIImage(data: imageData)
-        } else {
-            pokemon.downloadImagePerfil()
-        }
-    
-//        cell.labelName?.text = pokemon.name
-//        cell.imageViewPokemon.image = UIImage()
-//        cell.pokemon = pokemon
+        cell.pokemon = pokemon
+//        cell.labelName.text = pokemon.name
+//        cell.labelName.layer.cornerRadius = 5
+//        cell.labelName.layer.masksToBounds = true
+//        cell.labelName.layer.borderColor = UIColor.gray.cgColor
+//        cell.labelName.layer.borderWidth = 0.5
 //
 //        if let imageData = pokemon.front_default {
-//            cell.imageViewPokemon.image = UIImage(data: imageData)
+//            cell.imagePokemon.image = UIImage(data: imageData)
+//            cell.backgroundImageView.image = UIImage(data: imageData)
+//            cell.backgroundImageView.transform = CGAffineTransform(scaleX: 4, y: 4)
+//
 //        } else {
 //            pokemon.downloadImagePerfil()
 //        }
+//
 //
         return cell
     }

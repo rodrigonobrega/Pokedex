@@ -19,4 +19,14 @@ extension String {
             return false
         }
     }
+    
+    
+    func capitalizingFirst() -> String {
+        return prefix(1).capitalized + dropFirst()
+    }
+    
+    mutating func capitalizeFirst() {
+        self = self.capitalizingFirst()
+    }
+    
 }
