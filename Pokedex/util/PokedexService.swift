@@ -119,4 +119,14 @@ class PokedexService {
         }
         return nil
     }
+    
+    func downloadImageFromUrlString(_ urlString:String,  _ completion: @escaping (_ data:Data?) -> Void) {
+        URLSession.shared.dataTask(with: URL(string: urlString)!) { (data, response, error) in
+            if error == nil {
+                completion(data!)
+            } else {
+                completion(nil)
+            }
+            }.resume()
+    }
 }

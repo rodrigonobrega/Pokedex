@@ -47,11 +47,12 @@ struct Constants {
         static let frontFemale = "front_female"
         static let frontShiny = "front_shiny"
         static let frontShinyFemale = "front_shiny_female"
+        static let notFound = "not_found"
     }
     
     struct PokemonAttributes {
         static let baseExperience = "base_experience"
-        static let height = "static let "
+        static let height = "height"
         static let weight = "weight"
     }
     

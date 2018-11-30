@@ -10,88 +10,29 @@ import UIKit
 
 extension Pokemon {
     
-//    func downloadImagePerfil_old() {
-//        if let urlString = self.url {
-//            DispatchQueue.main.async {
-//                URLSession.shared.dataTask(with: URL(string: urlString)!) { (data, response, error) in
-//
-//                    guard let data = data else {
-//                        return
-//                    }
-//
-//                    let parsedResult: [String:AnyObject]!
-//                    do {
-//                        parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String:AnyObject]
-//                    } catch {
-//                        return
-//                    }
-//                    if let sprites = parsedResult["sprites"] {
-//                        self.url_back_default       = self.checkUrl(sprites, key: "back_default")
-//                        self.url_back_female        = self.checkUrl(sprites, key: "back_female")
-//                        self.url_back_shiny         = self.checkUrl(sprites, key: "back_shiny")
-//                        self.url_back_shiny_female  = self.checkUrl(sprites, key: "back_shiny_female")
-//                        self.url_front_female       = self.checkUrl(sprites, key: "front_female")
-//                        self.url_front_shiny        = self.checkUrl(sprites, key: "front_shiny")
-//                        self.url_front_shiny_female = self.checkUrl(sprites, key: "front_shiny_female")
-//                        //try? self.managedObjectContext?.save()
-//
-//                        if let urlString = sprites["front_default"] {
-//                            if let urlString = urlString as? String {
-//
-//                                DispatchQueue.main.async {
-//                                    URLSession.shared.dataTask(with: URL(string: urlString)!) { (data, response, error) in
-//                                        if error == nil {
-//                                            self.front_default = data!
-//                                        }
-//                                        do {
-//
-//                                            try self.managedObjectContext?.save()
-//                                        } catch {
-//                                            print("EEERRRRROOOOOOOO")
-//                                        }
-//                                        }.resume()
-//                                }
-//
-//                            }
-//                        }
-//
-//                    }
-//
-//
-//                    }.resume()
-//            }
-//        }
-//    }
-    
     func downloadImagePerfil() {
         
-        print("downloading")
         if let urlString = self.url_front_default {
             
             DispatchQueue.main.async {
-                URLSession.shared.dataTask(with: URL(string: urlString)!) { (data, response, error) in
-                    if error == nil {
+                PokedexService.shared.downloadImageFromUrlString(urlString, { (data) in
+                    if (data != nil) {
                         self.front_default = data!
                     }
                     self.save()
-                    }.resume()
+                })
             }
             
-            
-            
         } else {
-            self.front_default = UIImage(named: "not_found")?.pngData()
+            self.front_default = UIImage(named: Constants.PokemonImage.notFound)?.pngData()
         }
-        
-        
     }
     
     func save() {
         do {
-            
             try self.managedObjectContext?.save()
         } catch {
-            print("EEERRRRROOOOOOOO")
+            print("Cannot save pokemon this time")
         }
     }
     
@@ -141,7 +82,6 @@ extension Pokemon {
                 } else {
                     completion(nil)
                 }
-           //     try? self.managedObjectContext?.save()
                 }.resume()
         }
     }
@@ -156,7 +96,5 @@ extension Pokemon {
         }
         return nil
     }
-    
    
 }
-

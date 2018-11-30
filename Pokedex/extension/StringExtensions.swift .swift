@@ -20,7 +20,6 @@ extension String {
         }
     }
     
-    
     func capitalizingFirst() -> String {
         return prefix(1).capitalized + dropFirst()
     }

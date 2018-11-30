@@ -20,7 +20,6 @@ class PokedexTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         setupFetchedResultsController()
         
         if fetchedResultsController.fetchedObjects?.count == 0 {
@@ -40,27 +39,6 @@ class PokedexTableViewController: UITableViewController {
     }
     
     
-//    func startAddPokemon() {
-//
-//
-//
-//        for pokemonAny in pokemonDictionary {
-//
-//            let entity = NSEntityDescription.entity(forEntityName: "Pokemon", in: dataController.viewContext)
-//            let pokemon = NSManagedObject(entity: entity!, insertInto: dataController.viewContext) as! Pokemon
-//
-//            let name = pokemonAny["name"] as? String
-//
-//            pokemon.name = name?.capitalizingFirst()
-//            pokemon.url = pokemonAny["url"] as? String
-//            let urlArray = pokemon.url?.components(separatedBy: "/")
-//            pokemon.identifier = urlArray![(urlArray?.count)! - 2]
-//
-//
-//        }
-//        self.navigationItem.prompt = "\(fetchedResultsController.fetchedObjects?.count ?? 0) pokemons found"
-//
-//    }
     func setupFetchedResultsController() {
         let fetchRequest:NSFetchRequest<Pokemon> = Pokemon.fetchRequest()
         let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
