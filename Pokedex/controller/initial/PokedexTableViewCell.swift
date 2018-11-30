@@ -15,6 +15,9 @@ class PokedexTableViewCell: UITableViewCell {
     @IBOutlet weak var imageFavorite: UIButton!
     @IBOutlet weak var imageViewPokemon: UIImageView!
     @IBOutlet weak var labelName: UILabel!
+    private let favorite = "favorite"
+    private let notFavorite = "not_favorite"
+    private let scaleFavoriteAnimation = "scaleFavoriteAnimation"
     
     var pokemon:Pokemon! {
         didSet {
@@ -30,9 +33,9 @@ class PokedexTableViewCell: UITableViewCell {
                 pokemon.downloadImagePerfil()
             }
             if (pokemon.favorite) {
-                self.imageFavorite.setImage(UIImage(named: "favorite"), for: .normal)
+                self.imageFavorite.setImage(UIImage(named: favorite), for: .normal)
             } else {
-                self.imageFavorite.setImage(UIImage(named: "not_favorite"), for: .normal)
+                self.imageFavorite.setImage(UIImage(named: notFavorite), for: .normal)
             }
         }
     }
@@ -43,7 +46,7 @@ class PokedexTableViewCell: UITableViewCell {
             AudioServicesPlayAlertSound(SystemSoundID(1519))
         }
         
-        self.imageFavorite.layer.removeAnimation(forKey: "scalew")
+        self.imageFavorite.layer.removeAnimation(forKey: scaleFavoriteAnimation)
         let animation = CABasicAnimation(keyPath: "transform.scale")
         animation.duration = 0.1
         animation.fromValue = NSNumber(value: 1)
@@ -51,25 +54,24 @@ class PokedexTableViewCell: UITableViewCell {
         animation.repeatCount = 1
         animation.autoreverses = true
       
-        self.imageFavorite.layer.add(animation, forKey: "scalew")
-        
+        self.imageFavorite.layer.add(animation, forKey: scaleFavoriteAnimation)
         
         if (self.pokemon.favorite) {
-            self.imageFavorite.setImage(UIImage(named: "favorite"), for: .normal)
-            SoundUtil.playSound(SoundUtil.SoundName.favorite)
-            
+            updateFavoriteImage(SoundUtil.SoundName.favorite)
         } else {
-            self.imageFavorite.setImage(UIImage(named: "not_favorite"), for: .normal)
-            SoundUtil.playSound(SoundUtil.SoundName.notFavorite)
+            updateFavoriteImage(SoundUtil.SoundName.notFavorite)
         }
-        
-
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             self.pokemon.favorite = !self.pokemon.favorite
             self.superview?.isUserInteractionEnabled = true
         }
         
+    }
+    
+    func updateFavoriteImage(_ name:SoundUtil.SoundName!) {
+        self.imageFavorite.setImage(UIImage(named: name.rawValue), for: .normal)
+        SoundUtil.playSound(name)
     }
 
 }
