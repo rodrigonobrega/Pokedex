@@ -9,8 +9,6 @@
 
 import Foundation
 
-
-
 struct Constants {
     
     // MARK: base url
@@ -49,5 +47,9 @@ struct Constants {
         static let frontFemale = "front_female"
         static let frontShiny = "front_shiny"
         static let frontShinyFemale = "front_shiny_female"
+    }
+    
+    struct SoundExtension {
+        static let wav = "wav"
     }
 }

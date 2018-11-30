@@ -10,8 +10,11 @@ import AVFoundation
 import AudioToolbox
 
 class SoundUtil {
+    static let playOneTime = 1
+    static let playInfinity = -1
+    
     enum SoundName:String  {
-        case favorite = "favorite"
+        case favorite =  "favorite"
         case notFavorite = "not_favorite"
         case finished = "finished"
         case tick = "tick"
@@ -20,7 +23,7 @@ class SoundUtil {
     static var player: AVAudioPlayer?
     
     static func playSound( _ fileName: SoundUtil.SoundName!) {
-        guard let url = Bundle.main.url(forResource: fileName.rawValue, withExtension: "wav") else { return }
+        guard let url = Bundle.main.url(forResource: fileName.rawValue, withExtension:Constants.SoundExtension.wav) else { return }
         
         do {
             
@@ -29,9 +32,9 @@ class SoundUtil {
             player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.wav.rawValue)
             
             guard let player = player else { return }
-            player.numberOfLoops = 1
+            player.numberOfLoops = playOneTime
             if fileName == .tick {
-                player.numberOfLoops = -1
+                player.numberOfLoops = playInfinity
             }
             
             player.play()
@@ -39,10 +42,5 @@ class SoundUtil {
         } catch let error {
             print(error.localizedDescription)
         }
-    }
-    
-    static func stopSound() {
-        player?.stop()
-        player = nil
     }
 }
