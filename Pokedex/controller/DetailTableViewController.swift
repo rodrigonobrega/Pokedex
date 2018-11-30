@@ -24,7 +24,7 @@ class DetailTableViewController: UITableViewController {
     var soundAnimated = false;
     
     private let favorite = "favorite"
-    private let notFavorite = "favorite"
+    private let notFavorite = "not_favorite"
     private let scaleImage = "scaleImage"
     
     
