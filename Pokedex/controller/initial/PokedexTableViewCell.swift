@@ -62,16 +62,15 @@ class PokedexTableViewCell: UITableViewCell {
             updateFavoriteImage(SoundUtil.SoundName.notFavorite)
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            self.pokemon.favorite = !self.pokemon.favorite
-            self.superview?.isUserInteractionEnabled = true
-        }
-        
     }
     
     func updateFavoriteImage(_ name:SoundUtil.SoundName!) {
         self.imageFavorite.setImage(UIImage(named: name.rawValue), for: .normal)
         SoundUtil.playSound(name)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.pokemon.favorite = !self.pokemon.favorite
+            self.superview?.isUserInteractionEnabled = true
+        }
     }
 
 }

@@ -40,7 +40,6 @@ class PokedexCollectionViewController: UICollectionViewController {
             fatalError(error.localizedDescription)
         }
         updateTitle()
-        
     }
    
     
@@ -82,9 +81,7 @@ extension PokedexCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as!  PokedexCollectionViewCell
         
-        
         let pokemon = fetchedResultsController.object(at: indexPath)
-     
         cell.pokemon = pokemon
         
         return cell
@@ -118,10 +115,6 @@ extension PokedexCollectionViewController : NSFetchedResultsControllerDelegate {
             self.collectionView.reloadItems(at: [indexPath!])
         default:
             self.collectionView.reloadData()
-            
-            
-            
-            
         }
         updateTitle()
     }

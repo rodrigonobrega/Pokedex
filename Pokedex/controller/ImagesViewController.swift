@@ -31,8 +31,6 @@ class ImagesViewController: UIViewController {
         return fetchedResultsController
     }()
     
-  
-    
     var pokemon:Pokemon! {
         didSet {
             do {
@@ -47,19 +45,19 @@ class ImagesViewController: UIViewController {
         }
     }
 
-    
     @IBAction func dismissDetailViewController(_ sender: Any) {
         self.performSegue(withIdentifier: "ViewMoreDetailSegue", sender: self)
     }
+    
     fileprivate func updateImages() {
         if arrayImages.count > 0 {
-            print("image")
             let image = UIImage(data: arrayImages.first!)
             let imageView = UIImageView(image: image)
             imageView.frame = self.view.frame
             self.view.addSubview(imageView)
         }
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if let layout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
@@ -74,16 +72,16 @@ class ImagesViewController: UIViewController {
             }
         }
     }
+    
     @objc func showDetail() {
         self.performSegue(withIdentifier: "ViewMoreDetailSegue", sender: self)
     }
+    
 }
-
 
 // MARK: - NSFetchedResultsControllerDelegate
 extension ImagesViewController {
    
-    
     private func addImageElementToArray() {
         if pokemon.back_default != nil && !arrayImages.contains(pokemon.back_default!) {
             arrayImages.append(pokemon.back_default!)
@@ -109,20 +107,17 @@ extension ImagesViewController {
         if pokemon.front_shiny_female != nil && !arrayImages.contains(pokemon.front_shiny_female!) {
             arrayImages.append(pokemon.front_shiny_female!)
         }
-        
     }
     
 }
 
-
 extension ImagesViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.arrayImages.count
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        print("index path \(indexPath)")
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! PokedexCollectionViewCell
         let image = UIImage(data: arrayImages[indexPath.row])
         
@@ -139,30 +134,16 @@ extension ImagesViewController: UICollectionViewDataSource, UICollectionViewDele
         self.performSegue(withIdentifier: "showImageSegue", sender: indexPath)
     }
     
-    
 }
 
 extension ImagesViewController:NSFetchedResultsControllerDelegate {
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        // addImages()
-        // updateImages()
          self.collectionView.reloadData()
     }
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         self.addImageElementToArray()
-//        switch type {
-//        case .insert:
-//            self.collectionView.insertItems(at: [newIndexPath!])
-//        case .delete:
-//            self.collectionView.deleteItems(at: [indexPath!])
-//        case .update:
-//            self.collectionView.reloadItems(at: [indexPath!])
-//        default:
-//            self.collectionView.reloadData()
-//        }
-       
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {

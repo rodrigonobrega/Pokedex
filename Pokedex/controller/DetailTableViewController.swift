@@ -12,36 +12,39 @@ import AVFoundation
 
 class DetailTableViewController: UITableViewController {
 
-    
-
     @IBOutlet weak var labelExperience: UILabel!
     @IBOutlet weak var labelHeight: UILabel!
     @IBOutlet weak var labelWeight: UILabel!
     @IBOutlet weak var imagePokemonView: UIImageView!
     @IBOutlet weak var imageFavorite: UIButton!
 
-    
     var player: AVPlayer?
     var dataController:DataController!
     var pokemon:Pokemon!
     var soundAnimated = false;
     
+    private let favorite = "favorite"
+    private let notFavorite = "favorite"
+    private let scaleImage = "scaleImage"
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupLayout()
+    }
+
+    fileprivate func setupLayout() {
         self.title = pokemon.name
         self.imagePokemonView.image = UIImage(data: pokemon.front_default!)
         self.imagePokemonView.layer.cornerRadius = self.imagePokemonView.frame.height/2
-
-       
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if (pokemon.favorite) {
-            self.imageFavorite.setImage(UIImage(named: "favorite"), for: .normal)
+            self.imageFavorite.setImage(UIImage(named: favorite), for: .normal)
         } else {
-            self.imageFavorite.setImage(UIImage(named: "not_favorite"), for: .normal)
+            self.imageFavorite.setImage(UIImage(named: notFavorite), for: .normal)
         }
     }
  
@@ -69,7 +72,7 @@ class DetailTableViewController: UITableViewController {
             AudioServicesPlayAlertSound(SystemSoundID(1519))
         }
         
-        self.imageFavorite.layer.removeAnimation(forKey: "scalew")
+        self.imageFavorite.layer.removeAnimation(forKey: scaleImage)
         let animation = CABasicAnimation(keyPath: "transform.scale")
         animation.duration = 0.1
         animation.fromValue = NSNumber(value: 1)
@@ -77,25 +80,26 @@ class DetailTableViewController: UITableViewController {
         animation.repeatCount = 1
         animation.autoreverses = true
         
-        self.imageFavorite.layer.add(animation, forKey: "scalew")
+        self.imageFavorite.layer.add(animation, forKey: scaleImage)
         
-        DispatchQueue.main.async {
+        
         if (!self.pokemon.favorite) {
-            self.imageFavorite.setImage(UIImage(named: "favorite"), for: .normal)
-            SoundUtil.playSound(SoundUtil.SoundName.favorite)
-            
+            updateFavoriteImage(SoundUtil.SoundName.favorite)
         } else {
-            self.imageFavorite.setImage(UIImage(named: "not_favorite"), for: .normal)
-            SoundUtil.playSound(SoundUtil.SoundName.notFavorite)
-        }
+            updateFavoriteImage(SoundUtil.SoundName.notFavorite)
         }
         
-        
+    }
+    
+    func updateFavoriteImage(_ name:SoundUtil.SoundName!) {
+        DispatchQueue.main.async {
+            self.imageFavorite.setImage(UIImage(named: name.rawValue), for: .normal)
+            SoundUtil.playSound(name)
+        }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             self.pokemon.favorite = !self.pokemon.favorite
             self.tableView?.isUserInteractionEnabled = true
         }
-        
     }
     
     func incrementLabel(_ label:UILabel, to endValue: Int, completion: (() -> Void)? = nil) {
@@ -132,8 +136,6 @@ class DetailTableViewController: UITableViewController {
         label.layer.add(scale, forKey: "scaleAnimation")
     }
     
-   
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let detailViewController = segue.destination as? ImagesViewController {
             detailViewController.dataController = self.dataController
@@ -141,18 +143,25 @@ class DetailTableViewController: UITableViewController {
         }
     }
     
-    
-    
-
 }
 
 extension DetailTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        self.performSegue(withIdentifier: "viewImageSegue", sender: pokemon)
+        if (pokemon.front_default == UIImage(named: "not_found")?.pngData()) {
+            showMessage("Has no images to display 🥺")
+            tableView.deselectRow(at: indexPath, animated: true)
+        }else {
+            self.performSegue(withIdentifier: "viewImageSegue", sender: pokemon)
+        }
     }
     
-    
+    func showMessage(_ message:String) {
+        let alert = UIAlertController(title: "Pokedex", message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "ok", style: .default, handler: nil)
+        alert.addAction(okAction)
+        self.present(alert, animated: true, completion: nil)
+    }
 }
 
 
