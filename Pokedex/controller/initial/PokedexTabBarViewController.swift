@@ -15,7 +15,11 @@ class PokedexTabBarViewController: UITabBarController, UITabBarControllerDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self
-        
+        setupViewControllers()
+    }
+    
+
+    fileprivate func setupViewControllers() {
         for viewController in viewControllers! {
             if let navigationViewController = viewController as? UINavigationController {
                 if let tableViewController = navigationViewController.viewControllers.first as? PokedexTableViewController {
@@ -30,6 +34,4 @@ class PokedexTabBarViewController: UITabBarController, UITabBarControllerDelegat
             }
         }
     }
-    
-
 }

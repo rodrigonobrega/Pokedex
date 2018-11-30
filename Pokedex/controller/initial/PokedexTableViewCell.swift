@@ -8,7 +8,6 @@
 
 import UIKit
 import AVFoundation
-//import AudioToolbox
 
 class PokedexTableViewCell: UITableViewCell {
 
@@ -72,24 +71,5 @@ class PokedexTableViewCell: UITableViewCell {
         }
         
     }
-    
-  //  static var player: AVAudioPlayer?
-//    
-//    static func playSound( _ fileName: String!) {
-//        guard let url = Bundle.main.url(forResource: fileName, withExtension: "wav") else { return }
-//        
-//        do {
-//            
-//            try AVAudioSession.sharedInstance().setActive(true)
-//            
-//            player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.wav.rawValue)
-//            
-//            guard let player = player else { return }
-//            
-//            player.play()
-//            
-//        } catch let error {
-//            print(error.localizedDescription)
-//        }
-//    }
+
 }

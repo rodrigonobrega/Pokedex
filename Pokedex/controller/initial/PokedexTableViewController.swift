@@ -12,32 +12,27 @@ import CoreData
 class PokedexTableViewController: UITableViewController {
 
     var dataController:DataController!
-    
     var fetchedResultsController: NSFetchedResultsController<Pokemon>!
-    
     var pokemonDictionary:[[String:AnyObject]]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupInitialLoad()
+    }
+    
+    fileprivate func setupInitialLoad() {
         setupFetchedResultsController()
         
         if fetchedResultsController.fetchedObjects?.count == 0 {
-            
             PokedexService.shared.loadPokemonList(dataController) { (success, message ,pokemonDictionary)  in
-                if success {
-                    // self.navigationItem.prompt = "\(message ?? String()) pokemons"
-                } else {
+                if !success {
                     if let message = message {
                         self.showMessage(message)
                     }
                 }
             }
         }
-      //  self.navigationItem.prompt = "\(fetchedResultsController.fetchedObjects?.count ?? 0) pokemons found"
-        
     }
-    
     
     func setupFetchedResultsController() {
         let fetchRequest:NSFetchRequest<Pokemon> = Pokemon.fetchRequest()
@@ -56,12 +51,11 @@ class PokedexTableViewController: UITableViewController {
         
     }
     
-    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        return fetchedResultsController.sectionIndexTitles
-    }
-    
-    override func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
-        return fetchedResultsController.section(forSectionIndexTitle: title, at: index)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let detailViewController = segue.destination as? DetailTableViewController {
+            detailViewController.dataController = self.dataController
+            detailViewController.pokemon = sender as? Pokemon
+        }
     }
     
     func showMessage(_ message:String) {
@@ -88,11 +82,12 @@ extension PokedexTableViewController {
         self.performSegue(withIdentifier: "detailPokemonSegue", sender: pokemon)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let detailViewController = segue.destination as? DetailTableViewController {
-            detailViewController.dataController = self.dataController
-            detailViewController.pokemon = sender as? Pokemon
-        }
+    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        return fetchedResultsController.sectionIndexTitles
+    }
+    
+    override func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
+        return fetchedResultsController.section(forSectionIndexTitle: title, at: index)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -116,36 +111,27 @@ extension PokedexTableViewController : NSFetchedResultsControllerDelegate {
 
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
         if type == .insert {
-            print("\(sectionIndex) - sectio")
             tableView.insertSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .fade)
         }
         if type == .update {
-            print("\(sectionIndex) - sections")
             tableView.insertSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .fade)
 
         }
     }
+    
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         UIView.performWithoutAnimation {
-        if type == .insert {
-            print("\(newIndexPath) - insert \(indexPath)")
-            tableView.insertRows(at: [newIndexPath!], with: .fade)
-        }
-        if type == .update {
-            
-          //  let visible = tableView.indexPathsForVisibleRows?.contains(indexPath!)
-          //  if visible! {
+            if type == .insert {
+                tableView.insertRows(at: [newIndexPath!], with: .fade)
+            }
+            if type == .update {
                 tableView.reloadRows(at: [indexPath!], with: .none)
-//            } else {
-//                print("not updates")
-//            }
-        }
+            }
         }
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         self.tableView.endUpdates()
-        //try? self.dataController.viewContext.save()
     }
     
     override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
