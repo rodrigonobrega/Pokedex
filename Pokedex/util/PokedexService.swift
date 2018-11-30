@@ -83,7 +83,6 @@ class PokedexService {
                 return
             }
             
-            
             let pokemon = Pokemon(context: dataController.viewContext)
             let name = pokemonAny[self.pokemonName] as? String
             
@@ -91,9 +90,9 @@ class PokedexService {
             pokemon.url = urlString
             let urlArray = pokemon.url?.components(separatedBy: self.urlSeparator)
             pokemon.identifier = urlArray![(urlArray?.count)! - 2]
-            pokemon.base_experience = parsedResult["base_experience"] as! Int32
-            pokemon.height = parsedResult["height"] as! Int32
-            pokemon.weight = parsedResult["weight"] as! Int32
+            pokemon.base_experience = parsedResult[Constants.PokemonAttributes.baseExperience] as! Int32
+            pokemon.height = parsedResult[Constants.PokemonAttributes.height] as! Int32
+            pokemon.weight = parsedResult[Constants.PokemonAttributes.weight] as! Int32
             
             if let sprites = parsedResult[self.pokemonSprites] {
                 pokemon.url_front_default      = self.checkUrl(sprites, key: Constants.PokemonImage.frontDefault)
