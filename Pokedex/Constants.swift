@@ -18,15 +18,10 @@ struct Constants {
         static let APIBaseURL = "https://pokeapi.co/api/v2/pokemon/"
     }
     
-    
-    // MARK: Flickr Response Keys
-    struct FlickrResponseKeys {
-        //            static let Status = "stat"
-        //            static let Photos = "photos"
-        //            static let Photo = "photo"
-        //            static let Title = "title"
-        //            static let MediumURL = "url_m"
+    struct Pokedex {
+        static let messageActivityShare = "\nSharing Pokemon"
     }
+    
     
     // MARK: Flickr Response Values
     struct FlickrResponseValues {
@@ -42,6 +37,17 @@ struct Constants {
         static let TrySometime = "Please try again in sometime"
         static let DataNotFound = "Data not found, please try again in sometime"
         static let InvalidData = "Return invalid data, please try again in sometime"
-        static let PhotoNotFound = "Cannot find photos, please try again in sometime"
+        static let PokemonNotFound = "Pokemon not found, please try again in sometime"
+    }
+    
+    struct PokemonImage {
+        static let frontDefault = "front_default"
+        static let backDefault = "back_default"
+        static let backFemale = "back_female"
+        static let backShiny = "back_shiny"
+        static let backShinyFemale = "back_shiny_female"
+        static let frontFemale = "front_female"
+        static let frontShiny = "front_shiny"
+        static let frontShinyFemale = "front_shiny_female"
     }
 }

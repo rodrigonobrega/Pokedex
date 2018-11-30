@@ -28,6 +28,7 @@ class PokedexCollectionViewCell: UICollectionViewCell {
             
             if let imageData = pokemon.front_default {
                 self.imagePokemon.image = UIImage(data: imageData)
+                self.imagePokemon.transform = CGAffineTransform(scaleX: 1, y: 1)
                 self.backgroundImageView.image = UIImage(data: imageData)
                 self.backgroundImageView.transform = CGAffineTransform(scaleX: 4, y: 4)
                 

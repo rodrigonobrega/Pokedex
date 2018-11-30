@@ -1,8 +1,8 @@
 //
-//  ViewMoreDetailViewController.swift
+//  DetailTableViewController.swift
 //  Pokedex
 //
-//  Created by Rodrigo on 22/11/18.
+//  Created by Rodrigo on 30/11/18.
 //  Copyright © 2018 Foxcode. All rights reserved.
 //
 
@@ -10,10 +10,10 @@ import UIKit
 import AVFoundation
 
 
-class DetailViewController: UIViewController {
+class DetailTableViewController: UITableViewController {
 
     
-    @IBOutlet weak var containerView: UIView!
+
     @IBOutlet weak var labelExperience: UILabel!
     @IBOutlet weak var labelHeight: UILabel!
     @IBOutlet weak var labelWeight: UILabel!
@@ -22,39 +22,35 @@ class DetailViewController: UIViewController {
     var player: AVPlayer?
     var dataController:DataController!
     var pokemon:Pokemon!
-    
-    
-    
+    var soundAnimated = false;
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.containerView.layer.cornerRadius = 20
-        
         self.title = pokemon.name
         self.imagePokemonView.image = UIImage(data: pokemon.front_default!)
         self.imagePokemonView.layer.cornerRadius = self.imagePokemonView.frame.height/2
-        
-        
-        
-        
-//        
-//        let font = UIFont(name: "pokemon_solid", size: 20)
-//        self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font!]
-
+        pokemon.favorite = true
     }
-    var soundAnimated = false;
+
+    
+ 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
         if (!soundAnimated) {
+            UIApplication.shared.beginIgnoringInteractionEvents()
             soundAnimated = true
             self.incrementLabel(self.labelHeight, to: Int(pokemon!.height)) {
                 self.incrementLabel(self.labelWeight, to: Int(self.pokemon!.weight), completion: {
-                    self.incrementLabel(self.labelExperience, to: Int(self.pokemon!.base_experience))
+                    self.incrementLabel(self.labelExperience, to: Int(self.pokemon!.base_experience), completion: {
+                        DispatchQueue.main.async {
+                            UIApplication.shared.endIgnoringInteractionEvents()
+                        }
+                    })
                 })
             }
         }
-        
     }
     
     func incrementLabel(_ label:UILabel, to endValue: Int, completion: (() -> Void)? = nil) {
@@ -102,10 +98,7 @@ class DetailViewController: UIViewController {
         }
     }
     
-
-    @IBAction func dismissDetailViewController(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
+    
     
 
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 import AVFoundation
-import AudioToolbox
+//import AudioToolbox
 
 class PokedexTableViewCell: UITableViewCell {
 
@@ -24,7 +24,9 @@ class PokedexTableViewCell: UITableViewCell {
             if let imageData = pokemon.front_default {
                 self.activityIndicator.stopAnimating()
                 self.imageViewPokemon.image = UIImage(data: imageData)
+                self.isUserInteractionEnabled = true
             } else {
+                self.isUserInteractionEnabled = false
                 self.activityIndicator.startAnimating()
                 pokemon.downloadImagePerfil()
             }
@@ -55,10 +57,11 @@ class PokedexTableViewCell: UITableViewCell {
         
         if (self.pokemon.favorite) {
             self.imageFavorite.setImage(UIImage(named: "favorite"), for: .normal)
-            PokedexTableViewCell.playSound("favorite")
+            SoundUtil.playSound(SoundUtil.SoundName.favorite)
+            
         } else {
             self.imageFavorite.setImage(UIImage(named: "not_favorite"), for: .normal)
-            PokedexTableViewCell.playSound("not_favorite")
+            SoundUtil.playSound(SoundUtil.SoundName.notFavorite)
         }
         
 
@@ -70,23 +73,23 @@ class PokedexTableViewCell: UITableViewCell {
         
     }
     
-    static var player: AVAudioPlayer?
-    
-    static func playSound( _ fileName: String!) {
-        guard let url = Bundle.main.url(forResource: fileName, withExtension: "wav") else { return }
-        
-        do {
-            
-            try AVAudioSession.sharedInstance().setActive(true)
-            
-            player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.wav.rawValue)
-            
-            guard let player = player else { return }
-            
-            player.play()
-            
-        } catch let error {
-            print(error.localizedDescription)
-        }
-    }
+  //  static var player: AVAudioPlayer?
+//    
+//    static func playSound( _ fileName: String!) {
+//        guard let url = Bundle.main.url(forResource: fileName, withExtension: "wav") else { return }
+//        
+//        do {
+//            
+//            try AVAudioSession.sharedInstance().setActive(true)
+//            
+//            player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.wav.rawValue)
+//            
+//            guard let player = player else { return }
+//            
+//            player.play()
+//            
+//        } catch let error {
+//            print(error.localizedDescription)
+//        }
+//    }
 }

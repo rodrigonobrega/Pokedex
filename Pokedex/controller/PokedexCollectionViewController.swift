@@ -12,6 +12,7 @@ import CoreData
 class PokedexCollectionViewController: UICollectionViewController {
     
     var dataController:DataController!
+    var labelNotFound:UILabel!
     
     lazy var fetchedResultsController: NSFetchedResultsController<Pokemon> = {
         
@@ -38,20 +39,13 @@ class PokedexCollectionViewController: UICollectionViewController {
         } catch {
             fatalError(error.localizedDescription)
         }
-        
-        if fetchedResultsController.fetchedObjects?.count == 0 {
-            PokedexService.shared.loadPokemonList(dataController) { (message, pokemonDictionary) in
-                if let message = message {
-                    self.showMessage(message)
-                }
-            }
-            
-        }
+        updateTitle()
         
     }
+   
     
     func showMessage(_ message:String) {
-        let alert = UIAlertController(title: "Virtual Tourist", message: message, preferredStyle: .alert)
+        let alert = UIAlertController(title: "Pokedex", message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "ok", style: .default, handler: nil)
         alert.addAction(okAction)
         self.present(alert, animated: true, completion: nil)
@@ -79,7 +73,7 @@ extension PokedexCollectionViewController {
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let detailViewController = segue.destination as? ImagesViewController {
+        if let detailViewController = segue.destination as? DetailTableViewController {
             detailViewController.dataController = self.dataController
             detailViewController.pokemon = sender as? Pokemon
         }
@@ -87,27 +81,12 @@ extension PokedexCollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as!  PokedexCollectionViewCell
-        //let cell = collectionView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! UICollectionViewCell
+        
         
         let pokemon = fetchedResultsController.object(at: indexPath)
-     //   cell.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+     
         cell.pokemon = pokemon
-//        cell.labelName.text = pokemon.name
-//        cell.labelName.layer.cornerRadius = 5
-//        cell.labelName.layer.masksToBounds = true
-//        cell.labelName.layer.borderColor = UIColor.gray.cgColor
-//        cell.labelName.layer.borderWidth = 0.5
-//
-//        if let imageData = pokemon.front_default {
-//            cell.imagePokemon.image = UIImage(data: imageData)
-//            cell.backgroundImageView.image = UIImage(data: imageData)
-//            cell.backgroundImageView.transform = CGAffineTransform(scaleX: 4, y: 4)
-//
-//        } else {
-//            pokemon.downloadImagePerfil()
-//        }
-//
-//
+        
         return cell
     }
     
@@ -117,6 +96,16 @@ extension PokedexCollectionViewController {
 extension PokedexCollectionViewController : NSFetchedResultsControllerDelegate {
     
    
+    
+    fileprivate func updateTitle() {
+        if (fetchedResultsController.fetchedObjects?.count)! > 0 {
+            self.navigationItem.title = "Favorite(\(fetchedResultsController.fetchedObjects?.count ?? 0))"
+            self.navigationItem.prompt = nil
+        } else {
+            self.navigationItem.prompt = "Your favorites will appear here!"
+            self.navigationItem.title = "Favorite"
+        }
+    }
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         
@@ -129,7 +118,12 @@ extension PokedexCollectionViewController : NSFetchedResultsControllerDelegate {
             self.collectionView.reloadItems(at: [indexPath!])
         default:
             self.collectionView.reloadData()
+            
+            
+            
+            
         }
+        updateTitle()
     }
     
 }

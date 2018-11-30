@@ -25,54 +25,42 @@ class PokedexTableViewController: UITableViewController {
         
         if fetchedResultsController.fetchedObjects?.count == 0 {
             
-            PokedexService.shared.loadPokemonList(dataController) { (message ,pokemonDictionary)  in
-                if let message = message {
-                    if message != "success" {
+            PokedexService.shared.loadPokemonList(dataController) { (success, message ,pokemonDictionary)  in
+                if success {
+                    // self.navigationItem.prompt = "\(message ?? String()) pokemons"
+                } else {
+                    if let message = message {
                         self.showMessage(message)
                     }
-                } else if let pokemonDictionary = pokemonDictionary {
-                    self.pokemonDictionary = pokemonDictionary
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
-                        self.startAddPokemon()
-                    })
-
                 }
             }
         }
+      //  self.navigationItem.prompt = "\(fetchedResultsController.fetchedObjects?.count ?? 0) pokemons found"
+        
     }
     
-    func startAddPokemon() {
-        
-       
-        
-                    for pokemonAny in pokemonDictionary {
-                        //  print("downnnlooo \(photo["name"])")
-        
-                        let entity = NSEntityDescription.entity(forEntityName: "Pokemon", in: dataController.viewContext)
-                        let pokemon = NSManagedObject(entity: entity!, insertInto: dataController.viewContext) as! Pokemon
-        
-        
-                        //Pokemon(entity: <#T##NSEntityDescription#>, insertInto: <#T##NSManagedObjectContext?#>)
-                        //let pokemon = Pokemon(context: dataController.viewContext)
-                        let name = pokemonAny["name"] as? String
-                        
-                        pokemon.name = name?.capitalizingFirst()
-                        pokemon.url = pokemonAny["url"] as? String
-                        let urlArray = pokemon.url?.components(separatedBy: "/")
-                        pokemon.identifier = urlArray![(urlArray?.count)! - 2]
-        
-                        
-        //                do {
-        //           //         try dataController.viewContext.save()
-        //                } catch {
-        //                    print("Failed saving")
-        //                }
-        
-        
-                    }
-
-    }
     
+//    func startAddPokemon() {
+//
+//
+//
+//        for pokemonAny in pokemonDictionary {
+//
+//            let entity = NSEntityDescription.entity(forEntityName: "Pokemon", in: dataController.viewContext)
+//            let pokemon = NSManagedObject(entity: entity!, insertInto: dataController.viewContext) as! Pokemon
+//
+//            let name = pokemonAny["name"] as? String
+//
+//            pokemon.name = name?.capitalizingFirst()
+//            pokemon.url = pokemonAny["url"] as? String
+//            let urlArray = pokemon.url?.components(separatedBy: "/")
+//            pokemon.identifier = urlArray![(urlArray?.count)! - 2]
+//
+//
+//        }
+//        self.navigationItem.prompt = "\(fetchedResultsController.fetchedObjects?.count ?? 0) pokemons found"
+//
+//    }
     func setupFetchedResultsController() {
         let fetchRequest:NSFetchRequest<Pokemon> = Pokemon.fetchRequest()
         let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
@@ -87,7 +75,7 @@ class PokedexTableViewController: UITableViewController {
         } catch {
             fatalError(error.localizedDescription)
         }
-        self.navigationItem.prompt = "\(fetchRequest.affectedStores?.count ?? 0) pokemons found"
+        
     }
     
     override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
@@ -123,7 +111,7 @@ extension PokedexTableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let detailViewController = segue.destination as? ImagesViewController {
+        if let detailViewController = segue.destination as? DetailTableViewController {
             detailViewController.dataController = self.dataController
             detailViewController.pokemon = sender as? Pokemon
         }
