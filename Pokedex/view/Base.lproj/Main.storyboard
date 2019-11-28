@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wWi-je-z0A">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wWi-je-z0A">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -48,7 +47,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="120"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3OI-iJ-BGn" id="UGW-SM-OCw">
-                                    <rect key="frame" x="0.0" y="0.0" width="341" height="119.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="348" height="120"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fc4-oK-ROo">
@@ -59,13 +58,13 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pokedex" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="bkv-5a-uSU">
-                                            <rect key="frame" x="130" y="11" width="147" height="98"/>
+                                            <rect key="frame" x="130" y="11" width="154" height="98"/>
                                             <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="26"/>
                                             <color key="textColor" red="0.16078431372549018" green="0.16078431372549018" blue="0.16078431372549018" alpha="0.90913955479452058" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cp6-03-MpW">
-                                            <rect key="frame" x="293" y="40" width="40" height="40"/>
+                                            <rect key="frame" x="300" y="40" width="40" height="40"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="40" id="NWR-to-nQ3"/>
                                                 <constraint firstAttribute="height" constant="40" id="xaj-iG-d03"/>
@@ -106,7 +105,7 @@
                             <outlet property="delegate" destination="qhF-Ri-5LL" id="OIp-KY-dam"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Pokemons" id="6VL-of-5lJ"/>
+                    <navigationItem key="navigationItem" title="Pokemons" largeTitleDisplayMode="never" id="6VL-of-5lJ"/>
                     <connections>
                         <segue destination="VWV-xp-1Gs" kind="show" identifier="detailPokemonSegue" id="h8I-io-bXP"/>
                     </connections>
@@ -122,7 +121,7 @@
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" id="NRW-OU-S6d">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="JCc-qV-Wc2">
                             <size key="itemSize" width="170" height="180"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -204,7 +203,7 @@
                             <outlet property="delegate" destination="FE1-9v-MMR" id="kpg-qK-iio"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="Favorites" id="RsE-iS-lla"/>
+                    <navigationItem key="navigationItem" title="Favorites" largeTitleDisplayMode="never" id="RsE-iS-lla"/>
                     <connections>
                         <segue destination="VWV-xp-1Gs" kind="show" identifier="detailPokemonSegue" id="GJf-KD-hoh"/>
                     </connections>
@@ -222,7 +221,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="B17-fJ-AGc">
-                                <rect key="frame" x="0.0" y="116" width="375" height="458"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="525"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="TWV-mP-4Qg">
                                     <size key="itemSize" width="244" height="364"/>
@@ -232,7 +231,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="Yw5-fx-sjR" customClass="PokedexCollectionViewCell" customModule="Pokedex" customModuleProvider="target">
-                                        <rect key="frame" x="10" y="47" width="244" height="364"/>
+                                        <rect key="frame" x="10" y="80.5" width="244" height="364"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="244" height="364"/>
@@ -242,9 +241,9 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="244" height="364"/>
                                                 </imageView>
                                                 <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NLW-1A-dfZ">
-                                                    <rect key="frame" x="-12" y="8" width="268" height="368"/>
+                                                    <rect key="frame" x="-12" y="-12" width="268" height="388"/>
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Shw-Vz-FGk">
-                                                        <rect key="frame" x="0.0" y="0.0" width="268" height="368"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="268" height="388"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     </view>
                                                     <blurEffect style="light"/>
@@ -323,14 +322,14 @@
             <objects>
                 <viewController id="cT7-me-R2L" customClass="ImageViewController" customModule="Pokedex" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OrU-rM-i5L">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ru2-g1-EPK">
-                                <rect key="frame" x="0.0" y="20" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                             </imageView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="2gf-Cb-uGM">
-                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="603" width="375" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="ETB-6X-BB4"/>
                                 </constraints>
@@ -383,10 +382,10 @@
                             <tableViewSection id="JvV-MM-dQE">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="87" id="VME-j5-ezL">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="87"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="87"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VME-j5-ezL" id="ljm-aw-ckz">
-                                            <rect key="frame" x="0.0" y="0.0" width="341" height="87"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="348" height="87"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="not_found" translatesAutoresizingMaskIntoConstraints="NO" id="Zd6-jF-kvO">
@@ -409,7 +408,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mds-4I-5Dn">
-                                                    <rect key="frame" x="285" y="23.5" width="40" height="40"/>
+                                                    <rect key="frame" x="292" y="23.5" width="40" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="8s8-1I-QYo"/>
                                                         <constraint firstAttribute="width" constant="40" id="t3P-En-Kse"/>
@@ -433,7 +432,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Z8H-tQ-Sbv">
-                                        <rect key="frame" x="0.0" y="87" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="115" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Z8H-tQ-Sbv" id="KPv-8e-LUR">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -442,7 +441,7 @@
                                         <color key="backgroundColor" red="0.5" green="0.5" blue="0.5" alpha="0.095301797945205477" colorSpace="custom" customColorSpace="displayP3"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="83" id="i4g-Hx-5wv">
-                                        <rect key="frame" x="0.0" y="131" width="375" height="83"/>
+                                        <rect key="frame" x="0.0" y="159" width="375" height="83"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="i4g-Hx-5wv" id="Zpa-gI-iIV">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="83"/>
@@ -476,7 +475,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="83" id="VaF-hr-7nD">
-                                        <rect key="frame" x="0.0" y="214" width="375" height="83"/>
+                                        <rect key="frame" x="0.0" y="242" width="375" height="83"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VaF-hr-7nD" id="arf-ML-Eys">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="83"/>
@@ -509,7 +508,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="83" id="YCg-aG-W9l">
-                                        <rect key="frame" x="0.0" y="297" width="375" height="83"/>
+                                        <rect key="frame" x="0.0" y="325" width="375" height="83"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YCg-aG-W9l" id="5EZ-BY-nJD">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="83"/>
@@ -569,7 +568,7 @@
                     <tabBarItem key="tabBarItem" title="Pokemons" image="pokemon_icon" id="fS9-Qt-Wc0"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" largeTitles="YES" id="jPS-EV-UMP">
-                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="barTintColor" red="0.58039215686274503" green="0.066666666666666666" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -590,10 +589,10 @@
                     <tabBarItem key="tabBarItem" systemItem="favorites" id="ucO-V3-ESt"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" largeTitles="YES" id="YNj-1L-CGg">
-                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="barTintColor" red="0.58072251080000004" green="0.066734083" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.6989161532" green="0.066666666669999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -606,11 +605,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="not_favorite" width="491.51998901367188" height="491.51998901367188"/>
+        <image name="not_favorite" width="512" height="512"/>
         <image name="not_found" width="241" height="241"/>
         <image name="pokemon_icon" width="37" height="37"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="GJf-KD-hoh"/>
+        <segue reference="h8I-io-bXP"/>
     </inferredMetricsTieBreakers>
 </document>
